@@ -1,0 +1,12 @@
+Breve explicación de cómo se aplicó cada patrón
+
+Caso: Sistema de Solicitudes Académicas
+
+Repository:
+Se aplicó para separar el acceso a los datos de la lógica principal del sistema. En el proyecto, la interfaz SolicitudRepository define las operaciones para guardar, listar, buscar y actualizar solicitudes académicas. La clase SolicitudRepositoryMemoria implementa esas operaciones usando una lista en memoria. Así, si después se desea usar una base de datos, no sería necesario cambiar toda la lógica del sistema.
+
+Strategy:
+Se aplicó para manejar diferentes formas de procesar una solicitud académica. Por ejemplo, una solicitud puede aprobarse directamente, enviarse a revisión por coordinador o rechazarse por falta de requisitos. Cada forma de decisión se implementó en una clase diferente, todas usando la misma interfaz EstrategiaDecision. Esto permite cambiar la regla de procesamiento sin modificar la clase principal.
+
+Observer:
+Se aplicó para generar notificaciones automáticas cuando ocurre un cambio en una solicitud. Cuando una solicitud se registra o cambia de estado, el servicio notifica a otras clases como NotificadorEstudiante, AuditoriaSistema y PanelAdministrativo. De esta manera, el sistema avisa automáticamente sin mezclar esas acciones dentro de una sola clase.
