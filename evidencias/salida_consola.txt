@@ -1,0 +1,45 @@
+==============================================
+ SISTEMA DE GESTION DE PEDIDOS
+ Patrones: Repository, Strategy y Observer
+==============================================
+
+1) REGISTRO DE DATOS CON REPOSITORY
+[Observer - Cliente] Mensaje para Ana Torres: Pedido registrado correctamente. Estado actual: REGISTRADO
+[Observer - Auditoria] Pedido 1 registrado en bitacora. Evento: Pedido registrado correctamente
+[Observer - Panel] Se actualiza el panel de ventas con el pedido 1 -> REGISTRADO
+[Observer - Cliente] Mensaje para Luis Vera: Pedido registrado correctamente. Estado actual: REGISTRADO
+[Observer - Auditoria] Pedido 2 registrado en bitacora. Evento: Pedido registrado correctamente
+[Observer - Panel] Se actualiza el panel de ventas con el pedido 2 -> REGISTRADO
+[Observer - Cliente] Mensaje para Carla Ruiz: Pedido registrado correctamente. Estado actual: REGISTRADO
+[Observer - Auditoria] Pedido 3 registrado en bitacora. Evento: Pedido registrado correctamente
+[Observer - Panel] Se actualiza el panel de ventas con el pedido 3 -> REGISTRADO
+
+2) CONSULTA DE DATOS DESDE EL REPOSITORY
+Pedido{id=1, cliente='Ana Torres', producto='Laptop', cantidad=1, total=$850.0, estado=REGISTRADO}
+Pedido{id=2, cliente='Luis Vera', producto='Mouse inalambrico', cantidad=2, total=$34.5, estado=REGISTRADO}
+Pedido{id=3, cliente='Carla Ruiz', producto='Teclado mecanico', cantidad=1, total=$75.0, estado=REGISTRADO}
+
+3) ACCION PRINCIPAL CON ESTRATEGIA NORMAL
+[Accion principal] Procesamiento normal: el pedido 1 pasa a preparacion para despacho estandar.
+[Observer - Cliente] Mensaje para Ana Torres: Pedido procesado. Estado actual: EN_PREPARACION
+[Observer - Auditoria] Pedido 1 registrado en bitacora. Evento: Pedido procesado
+[Observer - Panel] Se actualiza el panel de ventas con el pedido 1 -> EN_PREPARACION
+
+4) CAMBIO DE STRATEGY A PROCESAMIENTO EXPRESS
+[Strategy] Estrategia actual: ProcesamientoExpressStrategy
+[Accion principal] Procesamiento express: el pedido 2 se marca como prioridad y se envia inmediatamente.
+[Observer - Cliente] Mensaje para Luis Vera: Pedido procesado. Estado actual: ENVIADO
+[Observer - Auditoria] Pedido 2 registrado en bitacora. Evento: Pedido procesado
+[Observer - Panel] Se actualiza el panel de ventas con el pedido 2 -> ENVIADO
+
+5) CAMBIO DE STRATEGY A RETIRO EN LOCAL
+[Strategy] Estrategia actual: ProcesamientoRetiroLocalStrategy
+[Accion principal] Retiro en local: el pedido 3 queda listo para que el cliente lo retire.
+[Observer - Cliente] Mensaje para Carla Ruiz: Pedido procesado. Estado actual: LISTO_PARA_RETIRO
+[Observer - Auditoria] Pedido 3 registrado en bitacora. Evento: Pedido procesado
+[Observer - Panel] Se actualiza el panel de ventas con el pedido 3 -> LISTO_PARA_RETIRO
+
+6) CONSULTA FINAL DE PEDIDOS ACTUALIZADOS
+Pedido{id=1, cliente='Ana Torres', producto='Laptop', cantidad=1, total=$850.0, estado=EN_PREPARACION}
+Pedido{id=2, cliente='Luis Vera', producto='Mouse inalambrico', cantidad=2, total=$34.5, estado=ENVIADO}
+Pedido{id=3, cliente='Carla Ruiz', producto='Teclado mecanico', cantidad=1, total=$75.0, estado=LISTO_PARA_RETIRO}
